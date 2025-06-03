@@ -37,6 +37,9 @@ class Hypergraph:
         self.edges[edge.id] = edge
 
     def update_edge(self, edge_id: UUID, updated: Edge) -> None:
+        updated = updated.model_copy(update={"id": edge_id})
+        validator = ConstraintValidator(self.edges, self.hyperedges)
+        validator.validate_edge(updated)
         self.edges[edge_id] = updated
 
     def delete_edge(self, edge_id: UUID) -> None:
@@ -55,6 +58,9 @@ class Hypergraph:
         self.hyperedges[hyperedge.id] = hyperedge
 
     def update_hyperedge(self, edge_id: UUID, updated: Hyperedge) -> None:
+        updated = updated.model_copy(update={"id": edge_id})
+        validator = ConstraintValidator(self.edges, self.hyperedges)
+        validator.validate_hyperedge(updated)
         self.hyperedges[edge_id] = updated
 
     def delete_hyperedge(self, edge_id: UUID) -> None:

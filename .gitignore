@@ -7,5 +7,8 @@ wheels/
 *.egg-info
 .mypy_cache/
 
+# project relics
+*.png
+
 # Virtual environments
 .venv
