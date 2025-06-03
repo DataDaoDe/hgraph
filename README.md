@@ -18,7 +18,8 @@ hgraph/
 ## 1. Complete the Core API
 
 **Next Steps:**
-- [ ] Support **directed multigraphs**: allow multiple edge types between same nodes.
+- [X] ~~`update_edge()` / `update_hyperedge()` should **re-validate** constraints.~~
+- [X] ~~Support **directed multigraphs**: allow multiple edge types between same nodes.~~
 - [ ] Allow **custom constraints**, e.g. via `@validator` on specific types.
 
 ---

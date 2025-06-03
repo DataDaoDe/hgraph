@@ -59,7 +59,18 @@ class ConstraintValidator:
                     raise ConstraintViolation(
                         f"{new_edge.type} is inverse-functional: multiple sources to same target"
                     )
-
+            # --- DUPLICATES ---
+            if not new_edge.config.allows_duplicates:
+                if any(
+                    e.type == new_edge.type
+                    and e.source == new_edge.source
+                    and e.target == new_edge.target
+                    and e.id != new_edge.id
+                    for e in self.edges.values()
+                ):
+                    raise ConstraintViolation(
+                        f"Duplicate {new_edge.type} edge between {new_edge.source} and {new_edge.target}"
+                    )
         # reflexive=True and symmetric=True imply permission, not enforcement → no check needed
 
     def validate_hyperedge(self, new_edge: Hyperedge):

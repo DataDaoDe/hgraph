@@ -98,6 +98,17 @@ class EdgeConfig(BaseModel):
         Example: "livesIn" — many people can live in the same city.
     """
 
+    allows_duplicates: bool = True
+    """
+    If False:
+        Only one edge of this type may exist between a given source and target.
+        Example: use `False` when the relation should be unique, like
+        "marriedTo".
+    If True:
+        Multiple edges of the same type between the same nodes are allowed.
+        This enables classic **directed multigraph** semantics.
+    """
+
 
 class HyperedgeConfig(BaseModel):
     """

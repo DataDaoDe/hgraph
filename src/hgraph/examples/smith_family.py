@@ -35,6 +35,16 @@ class MotherOf(Edge):
     )
 
 
+class MarriedTo(Edge):
+    source: UUID
+    target: UUID
+    config: EdgeConfig = EdgeConfig(
+        symmetric=True,
+        irreflexive=True,
+        allows_duplicates=False,
+    )
+
+
 class SiblingOf(Edge):
     source: UUID
     target: UUID
@@ -65,6 +75,9 @@ for child in [thomas, thalia, timothy, tula]:
     edges.append(MotherOf(source=lauren.id, target=child.id))
     edges.append(HasChild(source=james.id, target=child.id))
     edges.append(HasChild(source=lauren.id, target=child.id))
+
+# Marriage relationship
+edges.append(MarriedTo(source=james.id, target=lauren.id))
 
 # Sibling relationships
 siblings = [thomas, thalia, timothy, tula]
